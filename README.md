@@ -6,11 +6,11 @@ Plataforma colaborativa para levantamento, gestão e validação de requisitos d
 
 - Ana Carolina Gonçalves
 - Davi Marcondes Paes de Souza
-- João Gabriel Floriano de Olimpo
+- João Gabriel Floriano Olímpio
 - João Pedro Fonseca Alves de Carvalho
 - Lucca Castilho Costa
 - Lucas Souza da Silva
-- Miguel Oliveira de França
+- Miguel Oliveira de Almeida
 - Pedro de Lima Cavalcanti
 
 **Orientador:** Prof.º Wesley Fioreze
