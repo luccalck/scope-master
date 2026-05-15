@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { Bell, Search, User, LogOut, Check, BellOff } from "lucide-react";
+import { Bell, Search, User, LogOut, Check, BellOff, Menu } from "lucide-react";
 import { useNavigate } from "react-router";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
@@ -23,7 +23,11 @@ import type { Notificacao } from "../lib/types";
 
 type NotificacaoComProjeto = Notificacao & { projeto_nome?: string };
 
-export function Header() {
+interface HeaderProps {
+  onToggleSidebar?: () => void;
+}
+
+export function Header({ onToggleSidebar }: HeaderProps) {
   const navigate = useNavigate();
   const [notificacoes, setNotificacoes] = useState<NotificacaoComProjeto[]>([]);
   const [naoLidas, setNaoLidas] = useState(0);
@@ -133,21 +137,32 @@ export function Header() {
   };
 
   return (
-    <header className="flex h-16 items-center gap-4 border-b border-border bg-background px-6">
-      {/* Search */}
-      <div className="flex-1 max-w-xl">
+    <header className="flex h-16 items-center gap-2 sm:gap-4 border-b border-border bg-background px-3 sm:px-6 flex-shrink-0">
+      {/* Botão menu mobile (hamburger) — só aparece em < md */}
+      <Button
+        variant="ghost"
+        size="icon"
+        className="md:hidden flex-shrink-0"
+        onClick={onToggleSidebar}
+        aria-label="Abrir menu"
+      >
+        <Menu className="h-5 w-5" />
+      </Button>
+
+      {/* Search — em mobile fica menor, em desktop ocupa largura disponível */}
+      <div className="flex-1 max-w-xl min-w-0">
         <div className="relative">
           <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
           <Input
             type="search"
-            placeholder="Buscar requisitos, projetos..."
-            className="pl-10 bg-muted border-border text-foreground"
+            placeholder="Buscar..."
+            className="pl-10 bg-muted border-border text-foreground w-full"
           />
         </div>
       </div>
 
       {/* Right section */}
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
         {/* Theme Toggle */}
         <ThemeToggle />
 
@@ -163,7 +178,7 @@ export function Header() {
               )}
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-96">
+          <DropdownMenuContent align="end" className="w-[calc(100vw-2rem)] max-w-96 sm:w-96">
             <div className="flex items-center justify-between px-3 py-2">
               <DropdownMenuLabel className="p-0 text-base">
                 Notificações
@@ -247,18 +262,22 @@ export function Header() {
           </DropdownMenuContent>
         </DropdownMenu>
 
-        {/* User menu */}
+        {/* User menu — em mobile mostra só avatar, em desktop mostra nome e papel */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="gap-2">
-              <Avatar className="h-8 w-8">
+            <Button variant="ghost" className="gap-2 px-1 sm:px-3">
+              <Avatar className="h-8 w-8 flex-shrink-0">
                 <AvatarFallback className="bg-muted text-foreground">
                   {userInitials}
                 </AvatarFallback>
               </Avatar>
-              <div className="text-left">
-                <div className="text-sm font-medium text-foreground">{userName}</div>
-                <div className="text-xs text-muted-foreground">{userRole}</div>
+              <div className="hidden sm:block text-left min-w-0">
+                <div className="text-sm font-medium text-foreground truncate max-w-[140px]">
+                  {userName}
+                </div>
+                <div className="text-xs text-muted-foreground truncate max-w-[140px]">
+                  {userRole}
+                </div>
               </div>
             </Button>
           </DropdownMenuTrigger>

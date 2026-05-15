@@ -136,17 +136,17 @@ export function Dashboard() {
   ];
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
       {/* Page Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-foreground">Painel Geral</h1>
+          <h1 className="text-xl sm:text-2xl font-semibold text-foreground">Painel Geral</h1>
           <p className="text-sm text-muted-foreground mt-1">
             Bem-vindo de volta! Aqui está uma visão geral dos seus requisitos.
           </p>
         </div>
-        <div className="flex gap-3">
-          <Button variant="outline" asChild>
+        <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
+          <Button variant="outline" asChild className="w-full sm:w-auto">
             <Link to="/analytics">
               <TrendingUp className="mr-2 h-4 w-4" />
               Ver Relatórios
@@ -155,7 +155,7 @@ export function Dashboard() {
           {/* RN006 — Cliente não pode criar requisitos */}
           {!isCliente && (
             <Button
-              className="bg-foreground hover:bg-foreground/90 text-background"
+              className="bg-foreground hover:bg-foreground/90 text-background w-full sm:w-auto"
               onClick={() => setIsCreateRequirementModalOpen(true)}
             >
               <FileText className="mr-2 h-4 w-4" />
@@ -166,7 +166,7 @@ export function Dashboard() {
       </div>
 
       {/* Stats Grid */}
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 sm:gap-6 grid-cols-2 lg:grid-cols-4">
         {statCards.map((stat) => {
           const Icon = stat.icon;
           return (
@@ -189,7 +189,7 @@ export function Dashboard() {
         })}
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-3">
+      <div className="grid gap-4 sm:gap-6 grid-cols-1 lg:grid-cols-3">
         {/* Requisitos Recentes */}
         <Card className="lg:col-span-2 border-border shadow-sm">
           <CardHeader className="flex flex-row items-center justify-between pb-4">

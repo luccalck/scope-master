@@ -253,19 +253,19 @@ export function RequirementDetails() {
   const podeValidar = isPendente; // qualquer usuário autenticado pode validar nesta fase do protótipo
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
       {/* Breadcrumb */}
       <div className="flex items-center gap-2 text-sm text-muted-foreground">
         <Link to="/requirements" className="hover:text-foreground">
           Requisitos
         </Link>
         <span>/</span>
-        <span className="text-foreground">{requirement.codigo}</span>
+        <span className="text-foreground truncate">{requirement.codigo}</span>
       </div>
 
       {/* Header */}
-      <div className="flex items-start justify-between">
-        <div className="flex-1">
+      <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+        <div className="flex-1 min-w-0">
           <div className="flex items-center gap-3 mb-2">
             <Button variant="ghost" size="sm" asChild>
               <Link to="/requirements">
@@ -286,11 +286,11 @@ export function RequirementDetails() {
               {requirement.status_validacao}
             </Badge>
           </div>
-          <h1 className="text-2xl font-semibold text-foreground mb-2">
+          <h1 className="text-xl sm:text-2xl font-semibold text-foreground mb-2 break-words">
             {requirement.descricao}
           </h1>
           {requirement.projeto && (
-            <div className="flex items-center gap-4 text-sm text-muted-foreground">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-muted-foreground">
               <span className="flex items-center gap-1">
                 <Tag className="h-4 w-4" />
                 Projeto: {requirement.projeto.nome}
@@ -310,11 +310,11 @@ export function RequirementDetails() {
             </div>
           )}
         </div>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2 flex-shrink-0">
           {podeValidar ? (
             <>
               <Button
-                className="bg-green-600 hover:bg-green-700"
+                className="bg-green-600 hover:bg-green-700 flex-1 sm:flex-initial"
                 onClick={handleAprovar}
                 disabled={updating}
               >
@@ -323,7 +323,7 @@ export function RequirementDetails() {
               </Button>
               <Button
                 variant="outline"
-                className="border-red-300 text-red-700 hover:bg-red-50"
+                className="border-red-300 text-red-700 hover:bg-red-50 flex-1 sm:flex-initial"
                 onClick={abrirDialogoRejeitar}
                 disabled={updating}
               >
@@ -332,12 +332,12 @@ export function RequirementDetails() {
               </Button>
             </>
           ) : isAprovado ? (
-            <Button className="bg-green-600 hover:bg-green-700" disabled>
+            <Button className="bg-green-600 hover:bg-green-700 flex-1 sm:flex-initial" disabled>
               <CheckCircle2 className="h-4 w-4 mr-2" />
               Aprovado
             </Button>
           ) : (
-            <Button variant="outline" className="border-red-300 text-red-700" disabled>
+            <Button variant="outline" className="border-red-300 text-red-700 flex-1 sm:flex-initial" disabled>
               <XCircle className="h-4 w-4 mr-2" />
               Rejeitado
             </Button>
@@ -388,7 +388,7 @@ export function RequirementDetails() {
         </Card>
       )}
 
-      <div className="grid gap-6 lg:grid-cols-3">
+      <div className="grid gap-4 sm:gap-6 grid-cols-1 lg:grid-cols-3">
         {/* Main Content */}
         <div className="lg:col-span-2 space-y-6">
           <Card className="border-border shadow-sm">
@@ -405,7 +405,7 @@ export function RequirementDetails() {
               <CardTitle className="text-lg">Informações Técnicas</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="text-xs font-medium text-muted-foreground uppercase">
                     Código

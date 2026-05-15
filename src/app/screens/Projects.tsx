@@ -220,17 +220,17 @@ export function Projects() {
   }
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
       {/* Page Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-foreground">Projetos</h1>
+          <h1 className="text-xl sm:text-2xl font-semibold text-foreground">Projetos</h1>
           <p className="text-sm text-muted-foreground mt-1">
             Gerencie e acompanhe todos os seus projetos
           </p>
         </div>
         <Button
-          className="bg-foreground hover:bg-foreground/90 text-background"
+          className="bg-foreground hover:bg-foreground/90 text-background w-full sm:w-auto"
           onClick={() => setIsCreateModalOpen(true)}
         >
           <Plus className="mr-2 h-4 w-4" />
@@ -239,7 +239,7 @@ export function Projects() {
       </div>
 
       {/* Stats */}
-      <div className="grid gap-6 md:grid-cols-4">
+      <div className="grid gap-4 sm:gap-6 grid-cols-2 lg:grid-cols-4">
         <Card className="border-border shadow-sm">
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
@@ -303,14 +303,14 @@ export function Projects() {
       </div>
 
       {/* Filters and View Toggle */}
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          <div className="relative w-80">
+      <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 flex-1 min-w-0">
+          <div className="relative w-full sm:w-80">
             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             <Input
               type="search"
               placeholder="Buscar projetos..."
-              className="pl-10 bg-background border-border text-foreground"
+              className="pl-10 bg-background border-border text-foreground w-full"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -320,17 +320,17 @@ export function Projects() {
             <Button
               variant={showOnlyMine ? "default" : "outline"}
               onClick={() => setShowOnlyMine(!showOnlyMine)}
-              className={showOnlyMine
+              className={`w-full sm:w-auto ${showOnlyMine
                 ? "bg-foreground hover:bg-foreground/90 text-background"
                 : "border-border text-muted-foreground hover:bg-muted"
-              }
+              }`}
             >
               <UserCheck className="mr-2 h-4 w-4" />
               Participação
             </Button>
           )}
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 justify-end">
           <Button
             variant={view === "grid" ? "default" : "outline"}
             size="icon"
@@ -364,7 +364,7 @@ export function Projects() {
           <p className="text-muted-foreground">Nenhum projeto encontrado.</p>
         </div>
       ) : view === "grid" ? (
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {filteredProjects.map((project) => {
             const progress = getProgress(project);
 

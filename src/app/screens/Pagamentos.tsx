@@ -65,25 +65,25 @@ export function Pagamentos() {
   };
 
   return (
-    <div className="p-6 md:p-8 max-w-7xl mx-auto min-h-screen bg-background text-foreground">
-      <div className="text-center mb-12">
+    <div className="p-4 sm:p-6 md:p-8 max-w-7xl mx-auto min-h-screen bg-background text-foreground">
+      <div className="text-center mb-8 sm:mb-12">
         <div className="inline-flex items-center justify-center p-3 bg-foreground/10 rounded-full mb-4">
-          <CreditCard className="w-8 h-8 text-foreground" />
+          <CreditCard className="w-7 h-7 sm:w-8 sm:h-8 text-foreground" />
         </div>
-        <h1 className="text-3xl font-bold text-foreground mb-4">
+        <h1 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">
           Escolha o plano ideal para você
         </h1>
-        <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+        <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
           Evolua a gestão de requisitos dos seus projetos. Pague com segurança usando nossa integração Mercado Pago.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto">
         {PLANOS.map((plano) => (
           <div
             key={plano.id}
             className={`relative flex flex-col bg-card rounded-2xl shadow-sm transition-all duration-300 hover:shadow-xl ${
-              plano.destaque ? "border-2 border-indigo-600 scale-105 z-10" : "border border-border mt-4 md:mt-0"
+              plano.destaque ? "border-2 border-indigo-600 md:scale-105 z-10" : "border border-border mt-4 md:mt-0"
             }`}
           >
             {plano.destaque && (

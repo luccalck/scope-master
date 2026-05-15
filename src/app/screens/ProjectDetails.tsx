@@ -209,30 +209,31 @@ export function ProjectDetails() {
     reqs.length > 0 ? Math.round((aprovados / reqs.length) * 100) : 0;
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          <Button variant="ghost" size="icon" asChild>
+      <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+        <div className="flex items-start gap-3 sm:gap-4 min-w-0">
+          <Button variant="ghost" size="icon" asChild className="flex-shrink-0">
             <Link to="/projects">
               <ArrowLeft className="h-4 w-4" />
             </Link>
           </Button>
-          <div>
-            <h1 className="text-2xl font-semibold text-foreground">
+          <div className="min-w-0">
+            <h1 className="text-xl sm:text-2xl font-semibold text-foreground break-words">
               {project.nome}
             </h1>
-            <p className="text-sm text-muted-foreground mt-1">
+            <p className="text-sm text-muted-foreground mt-1 break-words">
               {project.descricao || "Sem descrição"}
             </p>
           </div>
         </div>
-        <div className="flex gap-3">
+        <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 flex-shrink-0">
           {/* RF06 — Novo Requisito direto neste projeto (RN006: oculto para Cliente) */}
           {currentUserRole !== "Cliente" && (
             <Button
               variant="outline"
               onClick={() => setIsCreateReqModalOpen(true)}
+              className="w-full sm:w-auto"
             >
               <Plus className="mr-2 h-4 w-4" />
               Novo Requisito
@@ -243,7 +244,7 @@ export function ProjectDetails() {
           <Button
             onClick={handleGerarDocumentacao}
             disabled={exportando}
-            className="bg-foreground text-background hover:bg-foreground/90"
+            className="bg-foreground text-background hover:bg-foreground/90 w-full sm:w-auto"
           >
             {exportando ? (
               <>
@@ -262,6 +263,7 @@ export function ProjectDetails() {
           <Button
             variant="outline"
             onClick={() => setIsAddMemberModalOpen(true)}
+            className="w-full sm:w-auto"
           >
             <Users className="mr-2 h-4 w-4" />
             Gerenciar Equipe
@@ -270,7 +272,7 @@ export function ProjectDetails() {
           {/* Menu de ações do projeto */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline" size="icon">
+              <Button variant="outline" size="icon" className="self-end sm:self-auto">
                 <MoreVertical className="h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
@@ -303,7 +305,7 @@ export function ProjectDetails() {
       </div>
 
       {/* Stats */}
-      <div className="grid gap-6 md:grid-cols-4">
+      <div className="grid gap-4 sm:gap-6 grid-cols-2 lg:grid-cols-4">
         <Card className="border-border shadow-sm">
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
@@ -367,7 +369,7 @@ export function ProjectDetails() {
       </div>
 
       {/* Project Info */}
-      <div className="grid gap-6 lg:grid-cols-3">
+      <div className="grid gap-4 sm:gap-6 grid-cols-1 lg:grid-cols-3">
         <Card className="lg:col-span-2 border-border shadow-sm">
           <CardHeader>
             <CardTitle className="text-lg font-semibold text-foreground">

@@ -115,7 +115,7 @@ export function Login() {
 
       <div className="w-full max-w-md relative z-10">
         {/* Marca */}
-        <div className="flex flex-col items-center mb-10">
+        <div className="flex flex-col items-center mb-6 sm:mb-10">
           <div className="mb-5 flex items-center justify-center w-12 h-12 rounded-md border border-border bg-card/50 backdrop-blur-sm">
             <div className="w-2 h-2 rounded-full bg-foreground" />
           </div>
@@ -129,7 +129,7 @@ export function Login() {
         </div>
 
         {/* Card */}
-        <div className="bg-card/40 backdrop-blur-md text-card-foreground rounded-md border border-border/60 p-8 shadow-2xl shadow-black/40">
+        <div className="bg-card/40 backdrop-blur-md text-card-foreground rounded-md border border-border/60 p-6 sm:p-8 shadow-2xl shadow-black/40">
           <form onSubmit={handleSubmit} className="space-y-5">
             {error && (
               <div className="bg-destructive/5 border border-destructive/30 rounded-md p-3 flex items-start gap-2">

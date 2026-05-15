@@ -149,11 +149,11 @@ export function Requirements() {
   }
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
       {/* Page Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-foreground">Requisitos</h1>
+          <h1 className="text-xl sm:text-2xl font-semibold text-foreground">Requisitos</h1>
           <p className="text-sm text-muted-foreground mt-1">
             Gerencie e acompanhe todos os requisitos do projeto
           </p>
@@ -161,7 +161,7 @@ export function Requirements() {
         {/* RN006 — Cliente não pode criar requisitos */}
         {!isCliente && (
           <Button
-            className="bg-foreground hover:bg-foreground/90 text-background"
+            className="bg-foreground hover:bg-foreground/90 text-background w-full sm:w-auto"
             onClick={() => setIsCreateModalOpen(true)}
           >
             <Plus className="mr-2 h-4 w-4" />
@@ -171,58 +171,60 @@ export function Requirements() {
       </div>
 
       {/* Filters and Search */}
-      <div className="flex items-center gap-4">
-        <div className="flex-1 max-w-md">
+      <div className="flex flex-col gap-3 lg:flex-row lg:items-center">
+        <div className="flex-1 lg:max-w-md">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             <Input
               type="search"
               placeholder="Buscar requisitos..."
-              className="pl-10 bg-background border-border text-foreground"
+              className="pl-10 bg-background border-border text-foreground w-full"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
         </div>
-        <Select value={statusFilter} onValueChange={setStatusFilter}>
-          <SelectTrigger className="w-40 bg-background border-border">
-            <SelectValue placeholder="Status" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">Todos os Status</SelectItem>
-            <SelectItem value="Pendente">Pendente</SelectItem>
-            <SelectItem value="Aprovado">Aprovado</SelectItem>
-            <SelectItem value="Rejeitado">Rejeitado</SelectItem>
-          </SelectContent>
-        </Select>
-        <Select value={tipoFilter} onValueChange={setTipoFilter}>
-          <SelectTrigger className="w-44 bg-background border-border">
-            <SelectValue placeholder="Tipo" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">Todos os Tipos</SelectItem>
-            <SelectItem value="Funcional">Funcional</SelectItem>
-            <SelectItem value="Não Funcional">Não Funcional</SelectItem>
-          </SelectContent>
-        </Select>
-        {/* Botão Participação — só para Admin/Dev */}
-        {!isCliente && (
-          <Button
-            variant={showOnlyMine ? "default" : "outline"}
-            onClick={() => setShowOnlyMine(!showOnlyMine)}
-            className={showOnlyMine
-              ? "bg-foreground hover:bg-foreground/90 text-background"
-              : "border-border text-muted-foreground hover:bg-muted"
-            }
-          >
-            <UserCheck className="mr-2 h-4 w-4" />
-            Participação
-          </Button>
-        )}
+        <div className="grid grid-cols-2 sm:flex sm:items-center gap-2 sm:gap-3">
+          <Select value={statusFilter} onValueChange={setStatusFilter}>
+            <SelectTrigger className="w-full sm:w-40 bg-background border-border">
+              <SelectValue placeholder="Status" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">Todos os Status</SelectItem>
+              <SelectItem value="Pendente">Pendente</SelectItem>
+              <SelectItem value="Aprovado">Aprovado</SelectItem>
+              <SelectItem value="Rejeitado">Rejeitado</SelectItem>
+            </SelectContent>
+          </Select>
+          <Select value={tipoFilter} onValueChange={setTipoFilter}>
+            <SelectTrigger className="w-full sm:w-44 bg-background border-border">
+              <SelectValue placeholder="Tipo" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">Todos os Tipos</SelectItem>
+              <SelectItem value="Funcional">Funcional</SelectItem>
+              <SelectItem value="Não Funcional">Não Funcional</SelectItem>
+            </SelectContent>
+          </Select>
+          {/* Botão Participação — só para Admin/Dev */}
+          {!isCliente && (
+            <Button
+              variant={showOnlyMine ? "default" : "outline"}
+              onClick={() => setShowOnlyMine(!showOnlyMine)}
+              className={`col-span-2 sm:col-auto ${showOnlyMine
+                ? "bg-foreground hover:bg-foreground/90 text-background"
+                : "border-border text-muted-foreground hover:bg-muted"
+              }`}
+            >
+              <UserCheck className="mr-2 h-4 w-4" />
+              Participação
+            </Button>
+          )}
+        </div>
       </div>
 
       {/* Results count */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-sm text-muted-foreground">
           Mostrando{" "}
           <span className="font-medium text-foreground">
@@ -259,9 +261,9 @@ export function Requirements() {
         )}
       </div>
 
-      {/* Table */}
-      <div className="rounded-lg border border-border bg-card">
-        <Table>
+      {/* Table — com overflow horizontal em mobile */}
+      <div className="rounded-lg border border-border bg-card overflow-x-auto">
+        <Table className="min-w-[800px]">
           <TableHeader>
             <TableRow className="border-border hover:bg-transparent">
               <TableHead className="w-12">

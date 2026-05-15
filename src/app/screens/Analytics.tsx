@@ -152,11 +152,11 @@ export function Analytics() {
   ];
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
       {/* Page Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-foreground">
+          <h1 className="text-xl sm:text-2xl font-semibold text-foreground">
             Relatórios e Métricas
           </h1>
           <p className="text-sm text-muted-foreground mt-1">
@@ -164,7 +164,7 @@ export function Analytics() {
           </p>
         </div>
         <div className="flex gap-3">
-          <Button className="bg-foreground hover:bg-foreground/90 text-background">
+          <Button className="bg-foreground hover:bg-foreground/90 text-background w-full sm:w-auto">
             <Download className="mr-2 h-4 w-4" />
             Exportar Relatório
           </Button>
@@ -172,7 +172,7 @@ export function Analytics() {
       </div>
 
       {/* Key Metrics */}
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 sm:gap-6 grid-cols-2 lg:grid-cols-4">
         {statCards.map((stat) => {
           const IconComponent = stat.icon;
           return (
@@ -199,7 +199,7 @@ export function Analytics() {
       </div>
 
       {/* Charts Row 1 */}
-      <div className="grid gap-6 lg:grid-cols-2">
+      <div className="grid gap-4 sm:gap-6 grid-cols-1 lg:grid-cols-2">
         <Card className="border-border shadow-sm">
           <CardHeader>
             <CardTitle className="text-lg font-semibold text-foreground">
@@ -352,7 +352,7 @@ export function Analytics() {
       </Card>
 
       {/* Charts Row 2 */}
-      <div className="grid gap-6 lg:grid-cols-3">
+      <div className="grid gap-4 sm:gap-6 grid-cols-1 lg:grid-cols-3">
         <Card className="lg:col-span-2 border-border shadow-sm">
           <CardHeader>
             <CardTitle className="text-lg font-semibold text-foreground">
@@ -360,7 +360,7 @@ export function Analytics() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-2 gap-4 sm:gap-6">
               <div className="p-6 rounded-lg border border-border shadow-sm text-center">
                 <div className="text-3xl font-bold text-foreground">
                   {reqsFuncionais}

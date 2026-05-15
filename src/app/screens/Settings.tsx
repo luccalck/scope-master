@@ -162,10 +162,10 @@ export function Settings() {
   };
 
   return (
-    <div className="p-6 md:p-8 max-w-4xl mx-auto space-y-8">
-      <div className="mb-8">
-        <h1 className="text-2xl font-bold text-foreground flex items-center gap-2">
-          <SettingsIcon className="w-6 h-6 text-foreground" />
+    <div className="p-4 sm:p-6 md:p-8 max-w-4xl mx-auto space-y-6 sm:space-y-8">
+      <div className="mb-6 sm:mb-8">
+        <h1 className="text-xl sm:text-2xl font-bold text-foreground flex items-center gap-2">
+          <SettingsIcon className="w-5 h-5 sm:w-6 sm:h-6 text-foreground flex-shrink-0" />
           Configurações
         </h1>
         <p className="text-muted-foreground mt-1">
