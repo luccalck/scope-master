@@ -42,8 +42,8 @@ Plataforma colaborativa para levantamento, gestão e validação de requisitos d
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/luccalck/Integrador.git
-   cd Integrador
+   git clone https://github.com/luccalck/ScopeMaster.git
+   cd ScopeMaster
    ```
 
 2. Instale as dependências:
