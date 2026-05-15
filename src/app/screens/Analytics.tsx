@@ -154,8 +154,8 @@ export function Analytics() {
   return (
     <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
       {/* Page Header */}
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <div>
+      <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
+        <div className="min-w-0">
           <h1 className="text-xl sm:text-2xl font-semibold text-foreground">
             Relatórios e Métricas
           </h1>
@@ -163,7 +163,7 @@ export function Analytics() {
             Acompanhe estatísticas de requisitos, projetos e equipe
           </p>
         </div>
-        <div className="flex gap-3">
+        <div className="flex gap-3 flex-shrink-0">
           <Button className="bg-foreground hover:bg-foreground/90 text-background w-full sm:w-auto">
             <Download className="mr-2 h-4 w-4" />
             Exportar Relatório
@@ -172,7 +172,7 @@ export function Analytics() {
       </div>
 
       {/* Key Metrics */}
-      <div className="grid gap-4 sm:gap-6 grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-3 sm:gap-4 lg:gap-6 grid-cols-2 md:grid-cols-4">
         {statCards.map((stat) => {
           const IconComponent = stat.icon;
           return (

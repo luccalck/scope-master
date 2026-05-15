@@ -151,8 +151,8 @@ export function Requirements() {
   return (
     <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
       {/* Page Header */}
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <div>
+      <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
+        <div className="min-w-0">
           <h1 className="text-xl sm:text-2xl font-semibold text-foreground">Requisitos</h1>
           <p className="text-sm text-muted-foreground mt-1">
             Gerencie e acompanhe todos os requisitos do projeto
@@ -161,7 +161,7 @@ export function Requirements() {
         {/* RN006 — Cliente não pode criar requisitos */}
         {!isCliente && (
           <Button
-            className="bg-foreground hover:bg-foreground/90 text-background w-full sm:w-auto"
+            className="bg-foreground hover:bg-foreground/90 text-background w-full sm:w-auto flex-shrink-0"
             onClick={() => setIsCreateModalOpen(true)}
           >
             <Plus className="mr-2 h-4 w-4" />
@@ -261,9 +261,47 @@ export function Requirements() {
         )}
       </div>
 
-      {/* Table — com overflow horizontal em mobile */}
-      <div className="rounded-lg border border-border bg-card overflow-x-auto">
-        <Table className="min-w-[800px]">
+      {/* Lista em CARDS — visível abaixo de lg (mobile e tablet) */}
+      <div className="lg:hidden space-y-3">
+        {filteredRequirements.length === 0 ? (
+          <div className="rounded-lg border border-border bg-card p-8 text-center text-muted-foreground text-sm">
+            Nenhum requisito encontrado.
+          </div>
+        ) : (
+          filteredRequirements.map((req) => (
+            <Link
+              key={req.id_requisito}
+              to={`/requirements/${req.id_requisito}`}
+              className="block rounded-lg border border-border bg-card p-4 hover:border-foreground/30 hover:bg-muted/30 transition-colors"
+            >
+              <div className="flex items-start justify-between gap-3 mb-2">
+                <div className="flex flex-wrap items-center gap-2 min-w-0">
+                  <span className="font-medium text-foreground text-sm">{req.codigo}</span>
+                  <Badge variant="outline" className={tipoColors[req.tipo] || ""}>
+                    {req.tipo}
+                  </Badge>
+                  <Badge
+                    variant="outline"
+                    className={statusColors[req.status_validacao] || ""}
+                  >
+                    {req.status_validacao}
+                  </Badge>
+                </div>
+              </div>
+              <p className="text-sm text-foreground/90 break-words mb-2">
+                {req.descricao.length > 120 ? req.descricao.slice(0, 120) + "..." : req.descricao}
+              </p>
+              <p className="text-xs text-muted-foreground truncate">
+                {req.projeto_nome}
+              </p>
+            </Link>
+          ))
+        )}
+      </div>
+
+      {/* Tabela — visível somente em lg+ */}
+      <div className="hidden lg:block rounded-lg border border-border bg-card overflow-x-auto">
+        <Table>
           <TableHeader>
             <TableRow className="border-border hover:bg-transparent">
               <TableHead className="w-12">

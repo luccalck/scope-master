@@ -222,15 +222,15 @@ export function Projects() {
   return (
     <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
       {/* Page Header */}
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <div>
+      <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
+        <div className="min-w-0">
           <h1 className="text-xl sm:text-2xl font-semibold text-foreground">Projetos</h1>
           <p className="text-sm text-muted-foreground mt-1">
             Gerencie e acompanhe todos os seus projetos
           </p>
         </div>
         <Button
-          className="bg-foreground hover:bg-foreground/90 text-background w-full sm:w-auto"
+          className="bg-foreground hover:bg-foreground/90 text-background w-full sm:w-auto flex-shrink-0"
           onClick={() => setIsCreateModalOpen(true)}
         >
           <Plus className="mr-2 h-4 w-4" />
@@ -239,7 +239,7 @@ export function Projects() {
       </div>
 
       {/* Stats */}
-      <div className="grid gap-4 sm:gap-6 grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-3 sm:gap-4 lg:gap-6 grid-cols-2 md:grid-cols-4">
         <Card className="border-border shadow-sm">
           <CardContent className="p-4 sm:p-6">
             <div className="flex items-center justify-between">

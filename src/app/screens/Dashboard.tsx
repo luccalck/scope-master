@@ -138,14 +138,14 @@ export function Dashboard() {
   return (
     <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
       {/* Page Header */}
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <div>
+      <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
+        <div className="min-w-0">
           <h1 className="text-xl sm:text-2xl font-semibold text-foreground">Painel Geral</h1>
           <p className="text-sm text-muted-foreground mt-1">
             Bem-vindo de volta! Aqui está uma visão geral dos seus requisitos.
           </p>
         </div>
-        <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
+        <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 flex-shrink-0">
           <Button variant="outline" asChild className="w-full sm:w-auto">
             <Link to="/analytics">
               <TrendingUp className="mr-2 h-4 w-4" />
@@ -166,7 +166,7 @@ export function Dashboard() {
       </div>
 
       {/* Stats Grid */}
-      <div className="grid gap-4 sm:gap-6 grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-3 sm:gap-4 lg:gap-6 grid-cols-2 md:grid-cols-4">
         {statCards.map((stat) => {
           const Icon = stat.icon;
           return (
