@@ -307,7 +307,7 @@ export function ProjectDetails() {
       {/* Stats */}
       <div className="grid gap-4 sm:gap-6 grid-cols-2 lg:grid-cols-4">
         <Card className="border-border shadow-sm">
-          <CardContent className="p-6">
+          <CardContent className="p-4 sm:p-6">
             <div className="flex items-center justify-between">
               <div className="rounded-lg p-3 bg-muted">
                 <FileText className="h-6 w-6 text-foreground" />
@@ -322,7 +322,7 @@ export function ProjectDetails() {
           </CardContent>
         </Card>
         <Card className="border-border shadow-sm">
-          <CardContent className="p-6">
+          <CardContent className="p-4 sm:p-6">
             <div className="flex items-center justify-between">
               <div className="rounded-lg p-3 bg-green-100">
                 <CheckCircle2 className="h-6 w-6 text-green-600" />
@@ -337,7 +337,7 @@ export function ProjectDetails() {
           </CardContent>
         </Card>
         <Card className="border-border shadow-sm">
-          <CardContent className="p-6">
+          <CardContent className="p-4 sm:p-6">
             <div className="flex items-center justify-between">
               <div className="rounded-lg p-3 bg-purple-100">
                 <Users className="h-6 w-6 text-purple-600" />
@@ -352,7 +352,7 @@ export function ProjectDetails() {
           </CardContent>
         </Card>
         <Card className="border-border shadow-sm">
-          <CardContent className="p-6">
+          <CardContent className="p-4 sm:p-6">
             <div className="flex items-center justify-between">
               <div className="rounded-lg p-3 bg-amber-100">
                 <TrendingUp className="h-6 w-6 text-amber-600" />
@@ -377,16 +377,16 @@ export function ProjectDetails() {
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-6">
-            <div className="flex items-center gap-6 text-sm">
+            <div className="flex flex-wrap items-center gap-x-4 sm:gap-x-6 gap-y-2 text-sm">
               <div className="flex items-center gap-2 text-muted-foreground">
-                <Calendar className="h-4 w-4" />
+                <Calendar className="h-4 w-4 flex-shrink-0" />
                 <span>
                   Criado em:{" "}
                   {new Date(project.data_criacao).toLocaleDateString("pt-BR")}
                 </span>
               </div>
               <div className="flex items-center gap-2 text-muted-foreground">
-                <FileText className="h-4 w-4" />
+                <FileText className="h-4 w-4 flex-shrink-0" />
                 <span>
                   {aprovados} de {reqs.length} requisitos aprovados
                 </span>
@@ -421,10 +421,10 @@ export function ProjectDetails() {
                     <Link
                       key={req.id_requisito}
                       to={`/requirements/${req.id_requisito}`}
-                      className="flex items-center gap-4 p-4 rounded-lg border border-border shadow-sm hover:border-foreground/30 hover:bg-muted/50 transition-colors"
+                      className="flex items-center gap-4 p-3 sm:p-4 rounded-lg border border-border shadow-sm hover:border-foreground/30 hover:bg-muted/50 transition-colors"
                     >
                       <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-3 mb-2">
+                        <div className="flex flex-wrap items-center gap-2 mb-2">
                           <span className="text-sm font-medium text-foreground">
                             {req.codigo}
                           </span>
@@ -443,7 +443,7 @@ export function ProjectDetails() {
                             {req.status_validacao}
                           </Badge>
                         </div>
-                        <h4 className="text-sm font-medium text-foreground mb-1">
+                        <h4 className="text-sm font-medium text-foreground break-words">
                           {req.descricao}
                         </h4>
                       </div>
@@ -487,18 +487,18 @@ export function ProjectDetails() {
                         </AvatarFallback>
                       </Avatar>
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-foreground">
+                        <p className="text-sm font-medium text-foreground truncate">
                           {member.usuario?.nome || "Usuário desconhecido"}
                         </p>
-                        <p className="text-xs text-muted-foreground">
+                        <p className="text-xs text-muted-foreground truncate">
                           {member.papel_no_projeto}
                         </p>
                       </div>
-                      {/* Botão de remover membro */}
+                      {/* Botão de remover membro — sempre visível em mobile, hover em desktop */}
                       <Button
                         variant="ghost"
                         size="icon"
-                        className="h-8 w-8 opacity-0 group-hover:opacity-100 transition-opacity text-red-500 hover:text-red-700 hover:bg-red-50"
+                        className="h-8 w-8 flex-shrink-0 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity text-red-500 hover:text-red-700 hover:bg-red-50"
                         onClick={() => {
                           setMemberToRemove({
                             id_usuario: member.id_usuario,

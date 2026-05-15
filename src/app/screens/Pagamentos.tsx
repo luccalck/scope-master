@@ -94,14 +94,14 @@ export function Pagamentos() {
               </div>
             )}
 
-            <div className="p-8">
+            <div className="p-6 sm:p-8">
               <div className="flex items-center gap-3 mb-4">
                 <div className={`p-2 rounded-lg bg-muted`}>{plano.icone}</div>
                 <h3 className="text-xl font-bold text-card-foreground">{plano.nome}</h3>
               </div>
 
               <div className="mb-6">
-                <span className="text-4xl font-extrabold text-card-foreground">{plano.preco}</span>
+                <span className="text-3xl sm:text-4xl font-extrabold text-card-foreground">{plano.preco}</span>
                 <span className="text-muted-foreground font-medium">{plano.periodo}</span>
               </div>
 

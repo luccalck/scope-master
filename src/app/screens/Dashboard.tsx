@@ -171,7 +171,7 @@ export function Dashboard() {
           const Icon = stat.icon;
           return (
             <Card key={stat.name} className="border-border shadow-sm">
-              <CardContent className="p-6">
+              <CardContent className="p-4 sm:p-6">
                 <div className="flex items-center justify-between">
                   <div className={`rounded-lg p-3 ${stat.bgColor} dark:bg-opacity-20`}>
                     <Icon className={`h-6 w-6 ${stat.color} dark:brightness-150`} />

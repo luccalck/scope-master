@@ -241,7 +241,7 @@ export function Projects() {
       {/* Stats */}
       <div className="grid gap-4 sm:gap-6 grid-cols-2 lg:grid-cols-4">
         <Card className="border-border shadow-sm">
-          <CardContent className="p-6">
+          <CardContent className="p-4 sm:p-6">
             <div className="flex items-center justify-between">
               <div className="rounded-lg p-3 bg-muted dark:bg-opacity-20">
                 <LayoutGrid className="h-6 w-6 text-foreground dark:brightness-150" />
@@ -256,7 +256,7 @@ export function Projects() {
           </CardContent>
         </Card>
         <Card className="border-border shadow-sm">
-          <CardContent className="p-6">
+          <CardContent className="p-4 sm:p-6">
             <div className="flex items-center justify-between">
               <div className="rounded-lg p-3 bg-green-100 dark:bg-opacity-20">
                 <FileText className="h-6 w-6 text-green-600 dark:brightness-150" />
@@ -271,7 +271,7 @@ export function Projects() {
           </CardContent>
         </Card>
         <Card className="border-border shadow-sm">
-          <CardContent className="p-6">
+          <CardContent className="p-4 sm:p-6">
             <div className="flex items-center justify-between">
               <div className="rounded-lg p-3 bg-purple-100 dark:bg-opacity-20">
                 <Users className="h-6 w-6 text-purple-600 dark:brightness-150" />
@@ -286,7 +286,7 @@ export function Projects() {
           </CardContent>
         </Card>
         <Card className="border-border shadow-sm">
-          <CardContent className="p-6">
+          <CardContent className="p-4 sm:p-6">
             <div className="flex items-center justify-between">
               <div className="rounded-lg p-3 bg-amber-100 dark:bg-opacity-20">
                 <TrendingUp className="h-6 w-6 text-amber-600 dark:brightness-150" />
@@ -450,48 +450,47 @@ export function Projects() {
                 return (
                   <div
                     key={project.id_projeto}
-                    className="p-6 hover:bg-muted/50 transition-colors cursor-pointer"
+                    className="p-4 sm:p-6 hover:bg-muted/50 transition-colors cursor-pointer"
                     onClick={() => navigate(`/projects/${project.id_projeto}`)}
                   >
-                    <div className="flex items-start gap-4">
-                      <div className="flex-1">
+                    <div className="flex flex-col md:flex-row md:items-start gap-4">
+                      <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-3 mb-2">
-                          <h3 className="text-lg font-semibold text-foreground">
+                          <h3 className="text-base sm:text-lg font-semibold text-foreground break-words">
                             {project.nome}
                           </h3>
                         </div>
-                        <p className="text-sm text-muted-foreground mb-4">
+                        <p className="text-sm text-muted-foreground mb-4 break-words">
                           {project.descricao || "Sem descrição"}
                         </p>
-                        <div className="flex items-center gap-6 text-sm text-muted-foreground">
+                        <div className="flex flex-wrap items-center gap-x-4 sm:gap-x-6 gap-y-2 text-sm text-muted-foreground">
                           <div className="flex items-center gap-1.5">
-                            <FileText className="h-4 w-4" />
+                            <FileText className="h-4 w-4 flex-shrink-0" />
                             <span>
                               {project.aprovados}/{project.totalRequisitos}{" "}
                               requisitos
                             </span>
                           </div>
                           <div className="flex items-center gap-1.5">
-                            <Calendar className="h-4 w-4" />
+                            <Calendar className="h-4 w-4 flex-shrink-0" />
                             <span>
-                              Criado em{" "}
                               {new Date(project.data_criacao).toLocaleDateString(
                                 "pt-BR"
                               )}
                             </span>
                           </div>
                           <div className="flex items-center gap-1.5">
-                            <Users className="h-4 w-4" />
+                            <Users className="h-4 w-4 flex-shrink-0" />
                             <span>{project.membros.length} membros</span>
                           </div>
                         </div>
                       </div>
-                      <div className="flex items-center gap-4">
-                        <div className="text-right">
+                      <div className="flex items-center gap-4 justify-between md:justify-start flex-shrink-0">
+                        <div className="text-left md:text-right">
                           <div className="text-sm text-muted-foreground mb-1">
                             Aprovação
                           </div>
-                          <div className="text-2xl font-semibold text-foreground">
+                          <div className="text-xl sm:text-2xl font-semibold text-foreground">
                             {progress}%
                           </div>
                         </div>

@@ -177,7 +177,7 @@ export function Analytics() {
           const IconComponent = stat.icon;
           return (
             <Card key={stat.name} className="border-border shadow-sm">
-              <CardContent className="p-6">
+              <CardContent className="p-4 sm:p-6">
                 <div className="flex items-start justify-between mb-3">
                   <div className="flex-1">
                     <span className="text-sm text-muted-foreground block mb-1">
@@ -362,7 +362,7 @@ export function Analytics() {
           <CardContent>
             <div className="grid grid-cols-2 gap-4 sm:gap-6">
               <div className="p-6 rounded-lg border border-border shadow-sm text-center">
-                <div className="text-3xl font-bold text-foreground">
+                <div className="text-2xl sm:text-3xl font-bold text-foreground">
                   {reqsFuncionais}
                 </div>
                 <div className="text-sm text-muted-foreground mt-1">
@@ -370,7 +370,7 @@ export function Analytics() {
                 </div>
               </div>
               <div className="p-6 rounded-lg border border-border shadow-sm text-center">
-                <div className="text-3xl font-bold text-purple-600">
+                <div className="text-2xl sm:text-3xl font-bold text-purple-600">
                   {reqsNaoFuncionais}
                 </div>
                 <div className="text-sm text-muted-foreground mt-1">

@@ -230,7 +230,7 @@ export function Settings() {
               </div>
             </div>
           </div>
-          <Button onClick={handleApplyAppearance} className="bg-foreground hover:bg-foreground/90 text-background">
+          <Button onClick={handleApplyAppearance} className="bg-foreground hover:bg-foreground/90 text-background w-full sm:w-auto">
             Aplicar Estilo
           </Button>
         </CardContent>
@@ -280,7 +280,7 @@ export function Settings() {
                 />
               </div>
             </div>
-            <Button type="submit" disabled={isLoading} className="bg-foreground hover:bg-foreground/90 text-background">
+            <Button type="submit" disabled={isLoading} className="bg-foreground hover:bg-foreground/90 text-background w-full sm:w-auto">
               {isLoading ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Save className="w-4 h-4 mr-2" />}
               Salvar Perfil
             </Button>
@@ -336,7 +336,7 @@ export function Settings() {
                 />
               </div>
             </div>
-            <Button type="submit" disabled={isLoading} className="bg-amber-600 hover:bg-amber-700 text-white">
+            <Button type="submit" disabled={isLoading} className="bg-amber-600 hover:bg-amber-700 text-white w-full sm:w-auto">
               {isLoading ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Lock className="w-4 h-4 mr-2" />}
               Alterar Senha
             </Button>
