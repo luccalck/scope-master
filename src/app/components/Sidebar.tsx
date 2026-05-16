@@ -82,7 +82,8 @@ export function Sidebar({ open, onClose }: SidebarProps) {
         <div className="flex h-16 items-center justify-between gap-2 px-4 sm:px-6 border-b border-border">
           <div className="flex items-center gap-2 min-w-0">
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-foreground flex-shrink-0">
-              <FileText className="h-5 w-5 text-white" />
+              {/* text-background inverte junto com o tema (branco em light, preto em dark) */}
+              <FileText className="h-5 w-5 text-background" />
             </div>
             <span className="text-xl font-semibold text-sidebar-foreground truncate">
               ScopeMaster

@@ -285,65 +285,90 @@ export function Analytics() {
                 projetos.find((p) => p.id_projeto === req.id_projeto)?.nome ||
                 "Desconhecido";
 
+              const statusBadge =
+                req.status_validacao === "Aprovado" ? (
+                  <Button
+                    size="sm"
+                    className="bg-green-600 hover:bg-green-700 text-white gap-1 pointer-events-none"
+                    disabled
+                  >
+                    <CheckCircle className="h-4 w-4" />
+                    Aprovado
+                  </Button>
+                ) : req.status_validacao === "Rejeitado" ? (
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    className="border-red-300 text-red-700 hover:bg-red-50 gap-1 pointer-events-none"
+                    disabled
+                  >
+                    <XCircle className="h-4 w-4" />
+                    Rejeitado
+                  </Button>
+                ) : (
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    className="border-yellow-300 text-yellow-700 hover:bg-yellow-50 pointer-events-none"
+                    disabled
+                  >
+                    Pendente
+                  </Button>
+                );
+
+              const tipoBadge = (
+                <Badge
+                  variant="outline"
+                  className={
+                    req.tipo === "Funcional"
+                      ? "bg-muted text-foreground border-border"
+                      : "bg-purple-50 text-purple-700 border-purple-200"
+                  }
+                >
+                  {req.tipo}
+                </Badge>
+              );
+
               return (
                 <div
                   key={req.id_requisito}
-                  className="flex items-center gap-4 p-4 rounded-lg border border-border shadow-sm hover:bg-muted/50 transition-colors"
+                  className="flex flex-col lg:flex-row lg:items-center gap-3 lg:gap-4 p-3 sm:p-4 rounded-lg border border-border shadow-sm hover:bg-muted/50 transition-colors"
                 >
-                  <div className="flex-shrink-0">
+                  {/* Linha 1 (mobile): código + badges do lado direito */}
+                  <div className="flex items-center justify-between gap-2 lg:hidden">
+                    <div className="text-xs font-medium text-muted-foreground bg-muted px-2 py-1 rounded flex-shrink-0">
+                      {req.codigo}
+                    </div>
+                    <div className="flex items-center gap-2">
+                      {tipoBadge}
+                      {statusBadge}
+                    </div>
+                  </div>
+
+                  {/* Código (desktop) */}
+                  <div className="hidden lg:block flex-shrink-0">
                     <div className="text-xs font-medium text-muted-foreground bg-muted px-2 py-1 rounded">
                       {req.codigo}
                     </div>
                   </div>
+
+                  {/* Descrição + meta */}
                   <div className="flex-1 min-w-0">
-                    <h4 className="font-medium text-foreground mb-1">
+                    <h4 className="font-medium text-foreground mb-1 break-words">
                       {req.descricao}
                     </h4>
-                    <div className="flex items-center gap-3 text-xs text-muted-foreground">
-                      <span>Projeto: {projetoNome}</span>
-                      <span>•</span>
+                    <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-muted-foreground">
+                      <span className="truncate">Projeto: {projetoNome}</span>
+                      <span className="hidden sm:inline">•</span>
                       <span>{req.tipo}</span>
                     </div>
                   </div>
-                  <Badge
-                    variant="outline"
-                    className={
-                      req.tipo === "Funcional"
-                        ? "bg-muted text-foreground border-border"
-                        : "bg-purple-50 text-purple-700 border-purple-200"
-                    }
-                  >
-                    {req.tipo}
-                  </Badge>
-                  {req.status_validacao === "Aprovado" ? (
-                    <Button
-                      size="sm"
-                      className="bg-green-600 hover:bg-green-700 text-white gap-1"
-                      disabled
-                    >
-                      <CheckCircle className="h-4 w-4" />
-                      Aprovado
-                    </Button>
-                  ) : req.status_validacao === "Rejeitado" ? (
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      className="border-red-300 text-red-700 hover:bg-red-50 gap-1"
-                      disabled
-                    >
-                      <XCircle className="h-4 w-4" />
-                      Rejeitado
-                    </Button>
-                  ) : (
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      className="border-yellow-300 text-yellow-700 hover:bg-yellow-50"
-                      disabled
-                    >
-                      Pendente
-                    </Button>
-                  )}
+
+                  {/* Badges (desktop) */}
+                  <div className="hidden lg:flex items-center gap-2 flex-shrink-0">
+                    {tipoBadge}
+                    {statusBadge}
+                  </div>
                 </div>
               );
             })}
