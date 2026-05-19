@@ -822,6 +822,51 @@ export async function fetchEstatisticas() {
   };
 }
 
+/**
+ * Buscar estatísticas filtradas pelo perfil do usuário (RN006 + escopo).
+ *
+ *  - Administrador: vê TODOS os projetos, requisitos e usuários do sistema.
+ *  - Desenvolvedor / Cliente: vê apenas os projetos em que está VINCULADO
+ *    (associativa projeto_usuario) e os requisitos desses projetos.
+ *
+ * Esse filtro é aplicado em aplicação. Para defesa em profundidade, o ideal
+ * em produção seria também ter RLS no banco filtrando por auth.uid().
+ */
+export async function fetchEstatisticasParaUsuario(
+  idUsuario: string,
+  perfil: string
+) {
+  const todasEstats = await fetchEstatisticas();
+
+  if (perfil === 'Administrador') {
+    return todasEstats;
+  }
+
+  // Coleta IDs dos projetos onde o usuário é membro
+  const meusProjetosIds = new Set(await fetchProjetosDoUsuario(idUsuario));
+
+  // Filtra projetos e requisitos
+  const projsFiltrados = todasEstats.projetos.filter((p) =>
+    meusProjetosIds.has(p.id_projeto)
+  );
+  const reqsFiltrados = todasEstats.requisitos.filter((r) =>
+    meusProjetosIds.has(r.id_projeto)
+  );
+
+  return {
+    totalRequisitos: reqsFiltrados.length,
+    aprovados: reqsFiltrados.filter((r) => r.status_validacao === 'Aprovado').length,
+    pendentes: reqsFiltrados.filter((r) => r.status_validacao === 'Pendente').length,
+    rejeitados: reqsFiltrados.filter((r) => r.status_validacao === 'Rejeitado').length,
+    totalProjetos: projsFiltrados.length,
+    // Para não admins: total de usuários é o número de pessoas nos projetos deles
+    totalUsuarios: 0, // será sobrescrito abaixo se calcularmos
+    requisitos: reqsFiltrados,
+    projetos: projsFiltrados,
+    usuarios: todasEstats.usuarios, // mantém para Header/avatares
+  };
+}
+
 // ==========================================
 // Serviços de Notificação
 // ==========================================

@@ -20,7 +20,7 @@ import {
   DropdownMenuTrigger,
 } from "../components/ui/dropdown-menu";
 import { CreateRequirementModal } from "../components/CreateRequirementModal";
-import { fetchEstatisticas } from "../lib/api";
+import { fetchEstatisticasParaUsuario } from "../lib/api";
 import { toast } from "sonner";
 import type { Requisito, Projeto } from "../lib/types";
 
@@ -34,7 +34,9 @@ export function Dashboard() {
   const [isCreateRequirementModalOpen, setIsCreateRequirementModalOpen] = useState(false);
   const userDataString = localStorage.getItem("scopemaster_user");
   const userData = userDataString ? JSON.parse(userDataString) : null;
-  const isCliente = userData?.role === "Cliente";
+  const userId: string = userData?.id || "";
+  const userRole: string = userData?.role || "";
+  const isCliente = userRole === "Cliente";
   const [loading, setLoading] = useState(true);
   const [stats, setStats] = useState({
     totalRequisitos: 0,
@@ -55,7 +57,8 @@ export function Dashboard() {
   const carregarDados = async (silencioso = false) => {
     try {
       if (!silencioso) setLoading(true);
-      const data = await fetchEstatisticas();
+      // Filtrado pelo perfil: Cliente/Desenvolvedor só vê seus projetos.
+      const data = await fetchEstatisticasParaUsuario(userId, userRole);
 
       setStats({
         totalRequisitos: data.totalRequisitos,

@@ -229,13 +229,16 @@ export function Projects() {
             Gerencie e acompanhe todos os seus projetos
           </p>
         </div>
-        <Button
-          className="bg-foreground hover:bg-foreground/90 text-background w-full sm:w-auto flex-shrink-0"
-          onClick={() => setIsCreateModalOpen(true)}
-        >
-          <Plus className="mr-2 h-4 w-4" />
-          Novo Projeto
-        </Button>
+        {/* Apenas Admin e Desenvolvedor criam projetos. Cliente apenas valida (RN006). */}
+        {!isCliente && (
+          <Button
+            className="bg-foreground hover:bg-foreground/90 text-background w-full sm:w-auto flex-shrink-0"
+            onClick={() => setIsCreateModalOpen(true)}
+          >
+            <Plus className="mr-2 h-4 w-4" />
+            Novo Projeto
+          </Button>
+        )}
       </div>
 
       {/* Stats */}

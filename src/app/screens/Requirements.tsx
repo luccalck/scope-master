@@ -70,6 +70,10 @@ export function Requirements() {
   const currentUserId = userData?.id || "";
   const currentUserRole = userData?.role || "";
   const isCliente = currentUserRole === "Cliente";
+  const isAdmin = currentUserRole === "Administrador";
+  // Cliente e Desenvolvedor NUNCA veem requisitos de projetos que não participam.
+  // O Administrador pode optar via botão "Participação".
+  const escopoForcado = !isAdmin;
 
   const carregarRequisitos = async () => {
     try {
@@ -89,8 +93,8 @@ export function Requirements() {
     if (currentUserId) {
       fetchProjetosDoUsuario(currentUserId).then(setMyProjectIds).catch(console.error);
     }
-    // Cliente sempre vê apenas seus requisitos
-    if (isCliente) {
+    // Cliente e Desenvolvedor sempre veem apenas requisitos dos seus projetos
+    if (escopoForcado) {
       setShowOnlyMine(true);
     }
   }, []);
@@ -206,8 +210,9 @@ export function Requirements() {
               <SelectItem value="Não Funcional">Não Funcional</SelectItem>
             </SelectContent>
           </Select>
-          {/* Botão Participação — só para Admin/Dev */}
-          {!isCliente && (
+          {/* Botão Participação — somente Administrador pode alternar.
+              Cliente e Desenvolvedor sempre veem apenas seus projetos (forçado). */}
+          {isAdmin && (
             <Button
               variant={showOnlyMine ? "default" : "outline"}
               onClick={() => setShowOnlyMine(!showOnlyMine)}

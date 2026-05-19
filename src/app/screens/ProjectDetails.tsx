@@ -260,49 +260,55 @@ export function ProjectDetails() {
             )}
           </Button>
 
-          {/* Botão Gerenciar Equipe — Abre modal de adicionar membro */}
-          <Button
-            variant="outline"
-            onClick={() => setIsAddMemberModalOpen(true)}
-            className="flex-1 sm:flex-initial"
-          >
-            <Users className="mr-2 h-4 w-4" />
-            <span className="hidden sm:inline">Gerenciar Equipe</span>
-            <span className="sm:hidden">Equipe</span>
-          </Button>
-
-          {/* Menu de ações do projeto */}
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="outline" size="icon" className="flex-shrink-0">
-                <MoreVertical className="h-4 w-4" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-48">
-              {/* Modificar — Amber */}
-              <DropdownMenuItem
-                onClick={() => setIsEditModalOpen(true)}
-                className="text-amber-600 focus:text-amber-600 focus:bg-amber-50 cursor-pointer"
+          {/* Cliente NÃO gerencia equipe nem altera o projeto.
+              Esses controles só aparecem para Admin/Desenvolvedor. */}
+          {currentUserRole !== "Cliente" && (
+            <>
+              {/* Botão Gerenciar Equipe — Abre modal de adicionar membro */}
+              <Button
+                variant="outline"
+                onClick={() => setIsAddMemberModalOpen(true)}
+                className="flex-1 sm:flex-initial"
               >
-                <Pencil className="mr-2 h-4 w-4" />
-                Modificar Projeto
-              </DropdownMenuItem>
+                <Users className="mr-2 h-4 w-4" />
+                <span className="hidden sm:inline">Gerenciar Equipe</span>
+                <span className="sm:hidden">Equipe</span>
+              </Button>
 
-              {/* Excluir — Vermelho (apenas Administrador) */}
-              {isAdmin && (
-                <>
-                  <DropdownMenuSeparator />
+              {/* Menu de ações do projeto */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline" size="icon" className="flex-shrink-0">
+                    <MoreVertical className="h-4 w-4" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-48">
+                  {/* Modificar — Amber */}
                   <DropdownMenuItem
-                    onClick={() => setIsDeleteDialogOpen(true)}
-                    className="text-red-600 focus:text-red-600 focus:bg-red-50 cursor-pointer"
+                    onClick={() => setIsEditModalOpen(true)}
+                    className="text-amber-600 focus:text-amber-600 focus:bg-amber-50 cursor-pointer"
                   >
-                    <Trash2 className="mr-2 h-4 w-4" />
-                    Excluir Projeto
+                    <Pencil className="mr-2 h-4 w-4" />
+                    Modificar Projeto
                   </DropdownMenuItem>
-                </>
-              )}
-            </DropdownMenuContent>
-          </DropdownMenu>
+
+                  {/* Excluir — Vermelho (apenas Administrador) */}
+                  {isAdmin && (
+                    <>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem
+                        onClick={() => setIsDeleteDialogOpen(true)}
+                        className="text-red-600 focus:text-red-600 focus:bg-red-50 cursor-pointer"
+                      >
+                        <Trash2 className="mr-2 h-4 w-4" />
+                        Excluir Projeto
+                      </DropdownMenuItem>
+                    </>
+                  )}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </>
+          )}
         </div>
       </div>
 
@@ -496,33 +502,39 @@ export function ProjectDetails() {
                           {member.papel_no_projeto}
                         </p>
                       </div>
-                      {/* Botão de remover membro — sempre visível em mobile, hover em desktop */}
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="h-8 w-8 flex-shrink-0 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity text-red-500 hover:text-red-700 hover:bg-red-50"
-                        onClick={() => {
-                          setMemberToRemove({
-                            id_usuario: member.id_usuario,
-                            nome: member.usuario?.nome || "Usuário desconhecido",
-                          });
-                          setIsRemoveMemberDialogOpen(true);
-                        }}
-                      >
-                        <UserMinus className="h-4 w-4" />
-                      </Button>
+                      {/* Botão de remover membro — apenas Admin/Dev podem remover.
+                          Sempre visível em mobile, hover em desktop. */}
+                      {currentUserRole !== "Cliente" && (
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-8 w-8 flex-shrink-0 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity text-red-500 hover:text-red-700 hover:bg-red-50"
+                          onClick={() => {
+                            setMemberToRemove({
+                              id_usuario: member.id_usuario,
+                              nome: member.usuario?.nome || "Usuário desconhecido",
+                            });
+                            setIsRemoveMemberDialogOpen(true);
+                          }}
+                        >
+                          <UserMinus className="h-4 w-4" />
+                        </Button>
+                      )}
                     </div>
                   ))
                 )}
               </div>
-              <Button
-                variant="outline"
-                className="w-full mt-4"
-                onClick={() => setIsAddMemberModalOpen(true)}
-              >
-                <Plus className="mr-2 h-4 w-4" />
-                Adicionar Membro
-              </Button>
+              {/* Apenas Admin/Dev podem adicionar membros à equipe. */}
+              {currentUserRole !== "Cliente" && (
+                <Button
+                  variant="outline"
+                  className="w-full mt-4"
+                  onClick={() => setIsAddMemberModalOpen(true)}
+                >
+                  <Plus className="mr-2 h-4 w-4" />
+                  Adicionar Membro
+                </Button>
+              )}
             </CardContent>
           </Card>
         </div>

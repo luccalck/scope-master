@@ -249,8 +249,12 @@ export function RequirementDetails() {
   const isRejeitado = requirement.status_validacao === "Rejeitado";
   const isPendente = requirement.status_validacao === "Pendente";
 
-  // Botões de validação aparecem para Cliente (RF09) e também para Admin/Dev (papel operacional)
-  const podeValidar = isPendente; // qualquer usuário autenticado pode validar nesta fase do protótipo
+  // RF09 / RN006 — apenas o perfil "Cliente" pode aprovar ou rejeitar.
+  // O Administrador também valida (papel de gestor pleno).
+  // O Desenvolvedor NUNCA aprova nem rejeita.
+  const isCliente = currentUserRole === "Cliente";
+  const isAdmin = currentUserRole === "Administrador";
+  const podeValidar = isPendente && (isCliente || isAdmin);
 
   return (
     <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">

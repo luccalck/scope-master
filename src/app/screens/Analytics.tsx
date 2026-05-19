@@ -35,10 +35,15 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import { fetchEstatisticas } from "../lib/api";
+import { fetchEstatisticasParaUsuario } from "../lib/api";
 import type { Requisito, Projeto, Usuario } from "../lib/types";
 
 export function Analytics() {
+  const userDataString = localStorage.getItem("scopemaster_user");
+  const userData = userDataString ? JSON.parse(userDataString) : null;
+  const userId: string = userData?.id || "";
+  const userRole: string = userData?.role || "";
+
   const [loading, setLoading] = useState(true);
   const [stats, setStats] = useState({
     totalRequisitos: 0,
@@ -56,7 +61,8 @@ export function Analytics() {
     const carregar = async () => {
       try {
         setLoading(true);
-        const data = await fetchEstatisticas();
+        // Filtrado pelo perfil: Cliente/Desenvolvedor só vê seus projetos.
+        const data = await fetchEstatisticasParaUsuario(userId, userRole);
         setStats({
           totalRequisitos: data.totalRequisitos,
           aprovados: data.aprovados,
