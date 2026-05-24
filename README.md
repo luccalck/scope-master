@@ -1,8 +1,8 @@
 # ScopeMaster
 
-Plataforma colaborativa para levantamento, gestão e validação de requisitos de software, desenvolvida como projeto integrador do curso de Análise e Desenvolvimento de Sistemas — SENAI Taubaté (2026).
+Collaborative platform for software requirements elicitation, management, and validation, developed as the capstone integrator project for the Systems Analysis and Development course — SENAI Taubaté (2026).
 
-## Equipe
+## Team
 
 - Ana Carolina Gonçalves
 - Davi Marcondes Paes de Souza
@@ -13,102 +13,102 @@ Plataforma colaborativa para levantamento, gestão e validação de requisitos d
 - Miguel Oliveira de Almeida
 - Pedro de Lima Cavalcanti
 
-**Orientador:** Prof.º Wesley Fioreze
+**Advisor:** Prof. Wesley Fioreze
 
-## Stack Tecnológico
+## Tech Stack
 
 - **Frontend:** React 18 + Vite + TypeScript + Tailwind CSS + Shadcn/UI + MUI
 - **Backend:** Supabase BaaS (PostgreSQL + Auth + Row-Level Security)
-- **Hospedagem:** Vercel
+- **Hosting:** Vercel
 
-## Funcionalidades
+## Features
 
-- Cadastro e autenticação de usuários com três perfis (Administrador, Desenvolvedor, Cliente)
-- Gestão completa de projetos (CRUD)
-- Cadastro de requisitos funcionais e não funcionais com código único por projeto
-- Fluxo de validação pelo cliente com aprovação/rejeição e feedback obrigatório
-- Geração automática de documentação em PDF dos requisitos aprovados
-- Dashboard com métricas e listagem de requisitos recentes
-- Notificações em tempo real para o analista responsável
+- User registration and authentication with three role profiles (Administrator, Developer, Client)
+- Full project management (CRUD)
+- Functional and non-functional requirements with project-scoped unique codes
+- Client validation flow with approval/rejection and mandatory feedback
+- Automatic PDF documentation generation for approved requirements
+- Dashboard with metrics and recent-requirements listing
+- Real-time notifications for the responsible analyst
 
-## Rodando localmente
+## Running locally
 
-### Pré-requisitos
+### Prerequisites
 
-- Node.js 18+ e npm
-- Conta no [Supabase](https://supabase.com) com um projeto criado
+- Node.js 18+ and npm
+- A [Supabase](https://supabase.com) account with a project created
 
-### Passos
+### Steps
 
-1. Clone o repositório:
+1. Clone the repository:
    ```bash
-   git clone https://github.com/luccalck/ScopeMaster.git
-   cd ScopeMaster
+   git clone https://github.com/luccalck/scope-master.git
+   cd scope-master
    ```
 
-2. Instale as dependências:
+2. Install dependencies:
    ```bash
    npm install
    ```
 
-3. Configure as variáveis de ambiente — copie o arquivo de exemplo e preencha com as credenciais do seu projeto Supabase:
+3. Configure environment variables — copy the example file and fill in your Supabase project credentials:
    ```bash
    cp .env.example .env
    ```
 
-4. Execute os scripts SQL da pasta `database/` no SQL Editor do Supabase, em ordem numérica (`00_*`, `01_*`, ...). Os scripts `99_*` são opcionais (populate / reset de demonstração).
+4. Run the SQL scripts under `database/` in the Supabase SQL Editor, in numeric order (`00_*`, `01_*`, ...). The `99_*` scripts are optional (populate / demo reset).
 
-5. Inicie o servidor de desenvolvimento:
+5. Start the development server:
    ```bash
    npm run dev
    ```
 
-   A aplicação abrirá em `http://localhost:5173` (ou na próxima porta disponível).
+   The app will open at `http://localhost:5173` (or the next available port).
 
-## Deploy no Vercel
+## Deploying to Vercel
 
-1. Faça login no [Vercel](https://vercel.com) e clique em **New Project**.
-2. Importe este repositório do GitHub.
-3. O Vercel detectará automaticamente o framework Vite — não é necessário ajustar build commands.
-4. Em **Environment Variables**, configure:
-   - `VITE_SUPABASE_URL` — URL do seu projeto Supabase
-   - `VITE_SUPABASE_ANON_KEY` — chave pública (anon) do Supabase
-5. Clique em **Deploy**.
+1. Log in to [Vercel](https://vercel.com) and click **New Project**.
+2. Import this repository from GitHub.
+3. Vercel will auto-detect the Vite framework — no build command tweaks needed.
+4. Under **Environment Variables**, set:
+   - `VITE_SUPABASE_URL` — your Supabase project URL
+   - `VITE_SUPABASE_ANON_KEY` — Supabase public (anon) key
+5. Click **Deploy**.
 
-O `vercel.json` na raiz do projeto já define os rewrites necessários para que o React Router funcione corretamente em produção (todas as rotas são servidas pelo `index.html`).
+The `vercel.json` at the project root already defines the rewrites required for React Router to work in production (all routes served by `index.html`).
 
-## Scripts disponíveis
+## Available scripts
 
-| Comando | Descrição |
+| Command | Description |
 |---|---|
-| `npm run dev` | Inicia o servidor de desenvolvimento com hot-reload |
-| `npm run build` | Gera o build de produção em `dist/` |
-| `npm run preview` | Serve o build de produção localmente para teste |
+| `npm run dev` | Starts the dev server with hot reload |
+| `npm run build` | Builds the production bundle into `dist/` |
+| `npm run preview` | Serves the production build locally for testing |
 
-## Estrutura do projeto
+## Project structure
 
 ```
 .
 ├── src/
 │   ├── app/
-│   │   ├── components/    # Componentes reutilizáveis e Shadcn/UI
-│   │   ├── screens/       # Telas (Login, Dashboard, Projects, etc.)
+│   │   ├── components/    # Reusable components and Shadcn/UI
+│   │   ├── screens/       # Screens (Login, Dashboard, Projects, etc.)
 │   │   ├── lib/           # api.ts, supabase.ts, types.ts
 │   │   └── App.tsx
-│   ├── styles/            # CSS global e Tailwind
+│   ├── styles/            # Global CSS and Tailwind
 │   └── main.tsx           # Entry point
-├── database/              # Scripts SQL versionados (00_*, 01_*, ...)
-├── docs/                  # ERS PDF, screenshots de auditoria, atribuições
-├── public/                # Assets estáticos
-├── .env.example           # Modelo de variáveis de ambiente
-├── vercel.json            # Configuração de deploy no Vercel
+├── database/              # Versioned SQL scripts (00_*, 01_*, ...)
+├── docs/                  # ERS PDF, audit screenshots, attributions
+├── public/                # Static assets
+├── .env.example           # Environment variables template
+├── vercel.json            # Vercel deploy configuration
 └── vite.config.ts
 ```
 
-## Documentação técnica
+## Technical documentation
 
-A Especificação de Requisitos do Software (ERS) completa — diagramas UML, regras de negócio, casos de teste e cronograma de Sprints — está em [`docs/ERS_ScopeMaster.pdf`](docs/ERS_ScopeMaster.pdf). Screenshots da auditoria visual em diferentes viewports (mobile, tablet, laptop, desktop) estão em [`docs/Screenshots/`](docs/Screenshots/).
+The complete Software Requirements Specification (SRS) — UML diagrams, business rules, test cases, and Sprint schedule — is in [`docs/ERS_ScopeMaster.pdf`](docs/ERS_ScopeMaster.pdf). Visual audit screenshots across viewports (mobile, tablet, laptop, desktop) are in [`docs/Screenshots/`](docs/Screenshots/).
 
-## Licença
+## License
 
-Projeto acadêmico desenvolvido para fins educacionais — SENAI Taubaté, 2026.
+Academic project developed for educational purposes — SENAI Taubaté, 2026.
