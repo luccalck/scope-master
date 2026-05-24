@@ -56,14 +56,7 @@ Plataforma colaborativa para levantamento, gestão e validação de requisitos d
    cp .env.example .env
    ```
 
-4. Execute os scripts SQL da pasta `Codigos do banco de dados/` no SQL Editor do Supabase, na seguinte ordem:
-   - `Modelagem de Usuários e Projetos com Enums e RLS.txt`
-   - `Tabela de Notificacoes.sql`
-   - `add_feedback_validacao.sql`
-   - `add_unique_codigo_requisito.sql`
-   - `add_data_criacao_requisito.sql`
-   - `Politicas de RLS para acesso anon.sql`
-   - `Seed de usuários, projetos e requisitos.txt` *(opcional, popula dados de demo)*
+4. Execute os scripts SQL da pasta `database/` no SQL Editor do Supabase, em ordem numérica (`00_*`, `01_*`, ...). Os scripts `99_*` são opcionais (populate / reset de demonstração).
 
 5. Inicie o servidor de desenvolvimento:
    ```bash
@@ -104,7 +97,8 @@ O `vercel.json` na raiz do projeto já define os rewrites necessários para que 
 │   │   └── App.tsx
 │   ├── styles/            # CSS global e Tailwind
 │   └── main.tsx           # Entry point
-├── Codigos do banco de dados/  # Scripts SQL e modelagem do Supabase
+├── database/              # Scripts SQL versionados (00_*, 01_*, ...)
+├── docs/                  # ERS PDF, screenshots de auditoria, atribuições
 ├── public/                # Assets estáticos
 ├── .env.example           # Modelo de variáveis de ambiente
 ├── vercel.json            # Configuração de deploy no Vercel
@@ -113,7 +107,7 @@ O `vercel.json` na raiz do projeto já define os rewrites necessários para que 
 
 ## Documentação técnica
 
-A Especificação de Requisitos do Software (ERS) completa, incluindo diagramas UML, regras de negócio, casos de teste e cronograma de Sprints, está disponível no documento `ERS_2026_ScopeMaster.pdf` (entregue separadamente no Google Classroom).
+A Especificação de Requisitos do Software (ERS) completa — diagramas UML, regras de negócio, casos de teste e cronograma de Sprints — está em [`docs/ERS_ScopeMaster.pdf`](docs/ERS_ScopeMaster.pdf). Screenshots da auditoria visual em diferentes viewports (mobile, tablet, laptop, desktop) estão em [`docs/Screenshots/`](docs/Screenshots/).
 
 ## Licença
 
